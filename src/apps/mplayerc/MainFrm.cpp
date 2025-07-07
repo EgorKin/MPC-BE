@@ -11393,10 +11393,16 @@ void CMainFrame::MoveVideoWindow(bool bShowStats/* = false*/, bool bForcedSetVid
 			const double shift2X = wnd_w * (m_PosX * 2 - 1);
 			const double shift2Y = wnd_h * (m_PosY * 2 - 1);
 
-			const double dLeft   = (wnd_w - w * m_ZoomX) * (1 - m_PosX); // ((shift2X - w) * m_ZoomX + wnd_w) / 2;
-			const double dTop    = (wnd_h - h * m_ZoomY) * (1 - m_PosY); // ((shift2Y - h) * m_ZoomY + wnd_h) / 2;
-			const double dRight  = dLeft + w * m_ZoomX; // ((shift2X + w) * m_ZoomX + wnd_w) / 2;
-			const double dBottom = dTop + h * m_ZoomY; // ((shift2Y + h) * m_ZoomY + wnd_h) / 2;
+			if (wnd_w < w * m_ZoomX)
+				const double dLeft   = (wnd_w - w * m_ZoomX) * (1 - m_PosX);
+			else
+				const double dLeft   = (wnd_w - w * m_ZoomX) * m_PosX;
+			if (wnd_h < h * m_ZoomY)
+				const double dTop    = (wnd_h - h * m_ZoomY) * (1 - m_PosY);
+			else
+				const double dTop    = (wnd_h - h * m_ZoomY) * m_PosY;
+			const double dRight  = dLeft + w * m_ZoomX;
+			const double dBottom = dTop + h * m_ZoomY;
 
 			rVid.left   = std::round(dLeft);
 			rVid.top    = std::round(dTop);
