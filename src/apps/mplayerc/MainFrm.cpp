@@ -11393,7 +11393,7 @@ void CMainFrame::MoveVideoWindow(bool bShowStats/* = false*/, bool bForcedSetVid
 			const double shift2X = wnd_w * (m_PosX * 2 - 1);
 			const double shift2Y = wnd_h * (m_PosY * 2 - 1);
 
-			const double dLeft = 0.0, dTop = 0.0;
+			double dLeft = 0.0, dTop = 0.0;
 			if (wnd_w < w * m_ZoomX)
 				dLeft   = (wnd_w - w * m_ZoomX) * (1 - m_PosX);
 			else
