@@ -7863,7 +7863,7 @@ void CMainFrame::OnViewRotate(UINT nID)
 			}
 
 			CString info;
-			info.Format(L"Rotation: %d°", rotation);
+			info.Format(L"Rotation: %dÂ°", rotation);
 			SendStatusMessage(info, 3000);
 		}
 	}
@@ -11393,10 +11393,10 @@ void CMainFrame::MoveVideoWindow(bool bShowStats/* = false*/, bool bForcedSetVid
 			const double shift2X = wnd_w * (m_PosX * 2 - 1);
 			const double shift2Y = wnd_h * (m_PosY * 2 - 1);
 
-			const double dLeft   = ((shift2X - w) * m_ZoomX + wnd_w) / 2;
-			const double dTop    = ((shift2Y - h) * m_ZoomY + wnd_h) / 2;
-			const double dRight  = ((shift2X + w) * m_ZoomX + wnd_w) / 2;
-			const double dBottom = ((shift2Y + h) * m_ZoomY + wnd_h) / 2;
+			const double dLeft   = (wnd_w - w * m_ZoomX) * (1 - m_PosX); // ((shift2X - w) * m_ZoomX + wnd_w) / 2;
+			const double dTop    = (wnd_h - h * m_ZoomY) * (1 - m_PosY); // ((shift2Y - h) * m_ZoomY + wnd_h) / 2;
+			const double dRight  = dLeft + w * m_ZoomX; // ((shift2X + w) * m_ZoomX + wnd_w) / 2;
+			const double dBottom = dTop + h * m_ZoomY; // ((shift2Y + h) * m_ZoomY + wnd_h) / 2;
 
 			rVid.left   = std::round(dLeft);
 			rVid.top    = std::round(dTop);
